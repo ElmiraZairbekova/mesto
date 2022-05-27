@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+<body class="root">
+    <header class="header">
+		<img src="./images/logo.png" alt="логотип" class="header__logo">
+	</header>
+    <main>
+        <section class="profile">
+            <div class="profile__container"></div>
+                <div class="profile__avatar">
+                    <img src="./images/avatar.jpg" alt="Фото профиля" class="profile__avatar">
+                </div>
+                <div class="profile__info">
+                    <h1 class="profile__name"></h1>
+                    <p class="profile__description"></p>
+                    <button class="profile__edit-button" aria-label="редактировать профиль"></button>
+                </div>
+                <button class="profile__add-button" aria-label="добавить фотографию"></button>
+            </div>
+        </section>
+        <section class="elements">
+            <figure class="element">
+                <img src="./images/element_photo1.jpg" alt="" class="element__image">
+                <figcaption class="element__figcaption">Гора Эльбрус</figcaption>
+                <button class="element__button-like" aria-label="лайк"></button>
+            </figure>
+            <figure class="element">
+                <img src="./images/element_photo2.jpg" alt="" class="element__image">
+                <figcaption class="element__figcaption">Домбай</figcaption>
+                <button class="element__button-like" aria-label="лайк"></button>
+            </figure>
+            <figure class="element">
+                <img src="./images/element_photo3.jpg" alt="" class="element__image">
+                <figcaption class="element__figcaption">Карачаевск</figcaption>
+                <button class="element__button-like" aria-label="лайк"></button>
+            </figure>
+            <figure class="element">
+                <img src="./images/element_photo1.jpg" alt="" class="element__image">
+                <figcaption class="element__figcaption">Гора Эльбрус</figcaption>
+                <button class="element__button-like" aria-label="лайк"></button>
+            </figure>
+            <figure class="element">
+                <img src="./images/element_photo2.jpg" alt="" class="element__image">
+                <figcaption class="element__figcaption">Домбай</figcaption>
+                <button class="element__button-like" aria-label="лайк"></button>
+            </figure>
+            <figure class="element">
+                <img src="./images/element_photo3.jpg" alt="" class="element__image">
+                <figcaption class="element__figcaption">Карачаево-Черкесская республика</figcaption>
+                <button class="element__button-like" aria-label="лайк"></button>
+            </figure>
+        </section>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </footer>
+        <div class="popup" id="popup-edit">
+            <div class="popup__content">
+                <button type="reset" class="popup__close-button" aria-label="закрыть окно"></button>
+
+                    
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

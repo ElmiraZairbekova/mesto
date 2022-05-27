@@ -1,0 +1,12 @@
+.element__figcaption {
+    font-size: 24px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.21;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 25px 0 25px 21px;
+    width: 70%;
+}
