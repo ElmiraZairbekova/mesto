@@ -4,4 +4,11 @@
     height: 120px;
     align-self: center;
     object-fit: cover;
+    padding: 0;
+}
+
+@media screen and (max-width: 1279px) {
+    .profile__avatar {
+        margin: 0 0 27px;
+}
 }

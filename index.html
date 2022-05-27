@@ -18,12 +18,12 @@
                     <img src="./images/avatar.jpg" alt="Фото профиля" class="profile__avatar">
                 </div>
                 <div class="profile__info">
-                    <h1 class="profile__name"></h1>
-                    <p class="profile__description"></p>
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button class="profile__edit-button" aria-label="редактировать профиль"></button>
+                    <p class="profile__description">Исследователь океана</p>
                 </div>
-                <button class="profile__add-button" aria-label="добавить фотографию"></button>
             </div>
+            <button class="profile__add-button" aria-label="добавить фотографию"></button>
         </section>
         <section class="elements">
             <figure class="element">
@@ -60,11 +60,15 @@
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
-        <div class="popup" id="popup-edit">
-            <div class="popup__content">
-                <button type="reset" class="popup__close-button" aria-label="закрыть окно"></button>
-
-                    
+        <div class="popup">
+            <div class="popup__container">
+                <button type="button" class="popup__close" aria-label="Закрыть"></button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form class="popup__form-edit" name="profileEdit">
+                    <input class="popup__input-name" type="text" name="name">
+                    <input class="popup__input-description" type="text" name="description">
+                </form>
+                <button type="submit" class="popup__save">Сохранить</button>
             </div>
         </div>
     </main>

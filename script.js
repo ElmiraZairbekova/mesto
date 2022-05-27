@@ -1,26 +1,44 @@
-const placesList = document.querySelector('.places-list');
+// Находим в DOM попап и его элементы, присваиваем константам
 
-const newCardForm = document.forms.new;
-const editUserForm = document.forms.user;
-const buttonOpenPopup = document.querySelector('.user-info__button');
-const buttonPopupEditUser = document.querySelector('.user-info__edit-button');
-let buttonClosePopup = document.querySelectorAll('.popup__close');
-const buttonAddCard = document.querySelector('.popup__button');
-const newCardPopup = document.querySelector('#add-new-card');
-const popupEditProfile = document.querySelector('#edit-user-info');
-const popupBigImage = document.querySelector('#show-image');
-const bigImage = document.querySelector('.popup__big-image');
-const submitEditUser = popupEditProfile.querySelector('.popup__button');
-const submitFormButton = newCardPopup.querySelector('.popup__button');
+let popup = document.querySelector('.popup');
+let btnEditProfile = document.querySelector('.profile__edit-button');
+let btnClosePopup = document.querySelector('.popup__close');
+let profileEditForm = document.forms['profileEdit'];
+let profileName = document.querySelector('.profile__name');
+let profileDescription = document.querySelector('.profile__description');
+let profileNameInput = document.querySelector('.popup__input-name');
+let profileDescriptionInput = document.querySelector('.popup__input-description');
 
-function editFormSubmit(event) {
-    event.preventDefault();
-    document.querySelector('.user-info__name').textContent = editUserForm.elements.username.value;
-    document.querySelector('.user-info__job').textContent = editUserForm.elements.about.value;
-    popupEditProfile.classList.remove('popup_is-opened');
-  }
+// добавляем модификатор, чтобы попап открывался 
+// Подставляем в поля текущие значения со страницы, убирая пробелы 
 
-editUserForm.addEventListener('submit', editFormSubmit);
-buttonPopupEditUser.addEventListener('click', openForm);
-buttonClosePopup.forEach(elem => elem.addEventListener('click', closeForm));
-editUserForm.addEventListener('input', validateEditProfile);
+function popupOpen() {
+    console.log("open");
+    popup.classList.add('popup_active');
+    profileNameInput.value = profileName.textContent.trim();
+    profileDescriptionInput.value = profileDescription.textContent.trim();
+}
+
+// чтобы закрыть попап, удаляем модификатор 
+
+function popupClose() {
+    popup.classList.remove('popup_active');
+}
+
+// добавляем обработчик, не забыв про отключение дефолта
+// по сабмиту возвращаем значения, введенные в форме 
+
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+    console.log(profileNameInput.value);
+    profileName.textContent = profileNameInput.value;
+    console.log(profileDescriptionInput.value);
+    profileDescription.textContent = profileDescriptionInput.value;
+    popupClose();
+}
+
+// добавляем вызов функций через подписку на click и submit  
+
+btnEditProfile.addEventListener('click', popupOpen);
+btnClosePopup.addEventListener('click', popupClose);
+profileEditForm.addEventListener('submit', formSubmitHandler);
