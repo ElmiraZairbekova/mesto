@@ -1,7 +1,7 @@
 let popup = document.querySelector('.popup');
 let btnEditProfile = document.querySelector('.profile__edit-button');
 let btnClosePopup = document.querySelector('.popup__close');
-let profileEditForm = document.forms['profileEdit'];
+let profileEditForm = document.querySelector('.popup__submit');
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
 let profileNameInput = document.querySelector('.popup__input-name');
@@ -20,13 +20,11 @@ function popupClose() {
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
-    console.log(profileNameInput.value);
     profileName.textContent = profileNameInput.value;
-    console.log(profileDescriptionInput.value);
     profileDescription.textContent = profileDescriptionInput.value;
     popupClose();
 }
 
 btnEditProfile.addEventListener('click', popupOpen);
 btnClosePopup.addEventListener('click', popupClose);
-profileEditForm.addEventListener('submit', formSubmitHandler);
+profileEditForm.addEventListener('click', formSubmitHandler);
