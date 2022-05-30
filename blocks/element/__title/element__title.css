@@ -4,12 +4,9 @@
     font-style: normal;
     font-weight: 900;
     line-height: 1.21;
-    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     width: 80%;
     margin: 0;
 }
