@@ -6,10 +6,10 @@
     border: none;
     box-sizing: border-box;
     cursor: pointer;
-    position: absolute;
     bottom: 30px;
     left: 240px;
     text-align: center;
+    background-color: transparent;
 }
 
 .element__button-like:hover {

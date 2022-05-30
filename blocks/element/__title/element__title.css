@@ -7,6 +7,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    width: 70%;
-    margin: 25px 0 26px 21px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+    margin: 0;
 }
