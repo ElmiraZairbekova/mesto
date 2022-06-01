@@ -11,12 +11,13 @@
   white-space: nowrap;
   overflow: hidden;
   width: 80%;
+  text-align: center;
+
 }
   
-@media screen and (max-width: 569px) {
+@media screen and (max-width: 1279px) {
   .profile__description {
     font-size: 14px;
     max-width: 75%;
-    text-align: center;
   }
 }
