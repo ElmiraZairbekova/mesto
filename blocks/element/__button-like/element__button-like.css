@@ -8,8 +8,9 @@
     cursor: pointer;
     text-align: center;
     background-color: transparent;
+    transition: opacity .2s linear;
 }
 
 .element__button-like:hover {
-    opacity: 0.5;
+    opacity: 0.6;
 }
