@@ -1,28 +1,28 @@
 const popup = document.querySelector('.popup');
 const btnEditProfile = document.querySelector('.profile__edit-button');
 const btnClosePopup = document.querySelector('.popup__close');
-const popupProfile = document.querySelector('.popup_form_edit');
+const popupProfile = document.querySelector('.popup_type_edit');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const profileNameInput = document.querySelector('.popup__input_type_name');
 const profileDescriptionInput = document.querySelector('.popup__input_type_description');
 
 
-const popupCard = document.querySelector('.popup__form_add');
-const cardTitle = document.querySelector('.element__title');
+const popupCard = document.querySelector('.popup_type_add');
 const cardTitleInput = document.querySelector('.popup__input_type_title');
 const cardLinkInput = document.querySelector('.popup__input_type_link');
-const formElementCard = document.querySelector('.popup_place_edit');
+const elements = document.querySelector('.elements');
+const btnCloseCard = document.querySelector('.popup__close_card');
+const cardEditForm = document.querySelector('.popup__form_add');
 
-
+const btnCloseImage = document.querySelector('.popup__close_image');
 const imagePopup = document.querySelector('.popup_view');
 const templateCard = document.querySelector('#templateCard').content;
-//const cardEditForm = document.querySelector('.popup__form_add');
 const btnAddCard = document.querySelector('.profile__add-button');
 const btnDelete = document.querySelector('.element__button-trash');
 const cardItemsElement = document.querySelector('.elements');
-//const addCardForm = document.querySelector('.popup__form-add');
 const getCardByEvent = evt => evt.currentTarget.closest('.element');
+const getElementByEvent = evt => evt.currentTarget.closest('.element');
 
 const initialCards = [
   {
@@ -51,7 +51,6 @@ const initialCards = [
   }
 ]; 
 
-//работает Popup и PopupEdit
 function popupOpen(popup) {
     popup.classList.add('popup_active');
     profileNameInput.value = profileName.textContent.trim();
@@ -76,47 +75,31 @@ function formSubmitHandler (evt) {
 }
 
 
-// черновик popup card
-// function popupAddCard() {
-  // popupOpen();
- // cardTitleInput.value = cardTitle.trim();
- // bigImage.src = element.link;
-//}
-
-// function formSubmitHandlerAdd (evt) {
-  //  evt.preventDefault();
-  //  cardTitle.textContent = cardTitleInput.value;
-  //  element.link = bigImage.src;
-  //  popupClose();
-//}
-
-//popup card не работает
-function popupAddCard (evt) {
-  evt.preventDefault()
-    const newCard = {
-    name: cardTitle.value,
-    link: cardLink.value
+function addFormCard (evt) {
+  evt.preventDefault();
+  const newCard = {
+    name: cardTitleInput.value,
+    link: cardLinkInput.value
   };
-  createCard (newCard);
-  formElementCard.reset();
-  popupClose (popupCard);
+  createCard(newCard);
+  cardEditForm.reset();
+  popupClose(popupCard);
 }
 
 //Like работает, но неправильно. Мне кажется, что мешает hover в стиле
-function handleLikeButton(evt) {
+function LikeButton(evt) {
   evt.target.classList.toggle('element__button-like_active');
   };
-
-//Работает
+  
 function createCard (element) {
   const cardElement = templateCard.querySelector('.element').cloneNode(true);
-  const bigImage = cardElement.querySelector('.element__image');
-  bigImage.addEventListener('click', ()=> openCard(cardElement));
+  const cardImage = cardElement.querySelector('.element__image');
+  cardImage.addEventListener('click', evt => {openPopupImage(evt)});
 
-  bigImage.src = element.link;
+  cardImage.src = element.link;
   cardElement.querySelector('.element__title').textContent = element.name;
 
-  cardElement.querySelector('.element__button-like').addEventListener('click', handleLikeButton);
+  cardElement.querySelector('.element__button-like').addEventListener('click', LikeButton);
 
   cardElement.querySelector('.element__button-trash').addEventListener('click', evt => {
     const card = getCardByEvent(evt);
@@ -128,17 +111,18 @@ function createCard (element) {
 
 initialCards.forEach(createCard); 
 
-//popup Big Image не работает
-function openCard(cardElement) {
-  imagePopup.querySelector('.popup__image').src = cardElement.querySelector('.element__image').src;
-  imagePopup.querySelector('.popup__description').textContent = cardElement.querySelector('.element__title').textContent;
-  popupOpen(imagePopup)
+const popupImage = document.querySelector('.popup_view');
+function openPopupImage(evt){
+const element = getElementByEvent(evt);
+popupImage.querySelector('.popup__image').src = element.querySelector('.element__image').src;
+popupImage.querySelector('.popup__description').textContent = element.querySelector('.element__title').textContent;
+popupOpen(popupImage);
 }
 
-// работает
 btnEditProfile.addEventListener('click',() => popupOpen(popupProfile));
 btnClosePopup.addEventListener('click', () => popupClose(popupProfile));
-popupProfile.addEventListener('submit', formSubmitHandler);
-//не работает
+btnCloseImage.addEventListener('click', () => popupClose(popupImage));
+btnCloseCard.addEventListener('click', () => popupClose(popupCard));
 btnAddCard.addEventListener('click',() => popupOpen(popupCard));
-popupCard.addEventListener('submit', popupAddCard);
+popupProfile.addEventListener('submit', formSubmitHandler);
+popupCard.addEventListener('submit', addFormCard);

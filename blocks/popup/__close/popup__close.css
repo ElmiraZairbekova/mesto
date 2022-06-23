@@ -11,10 +11,11 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-
+    transition: opacity 0.2s linear;
 }
 
 .popup__close:hover, :focus {
+    cursor: pointer;
     opacity: 0.6;
 }
 

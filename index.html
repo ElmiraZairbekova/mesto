@@ -31,9 +31,9 @@
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
-        <div class="popup popup_form_edit">
+        <div class="popup popup_type_edit">
             <div class="popup__container">
-                <form class="popup__form" name="profileEdit">
+                <form class="popup__form popup__form_edit">
                     <button class="popup__close" type="button" aria-label="Закрыть"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" required>
@@ -42,14 +42,14 @@
                 </form>
             </div>
         </div>
-        <div class="popup popup_form_add">
+        <div class="popup popup_type_add">
             <div class="popup__container">
-                <form class="popup__form popup_placedit"></form>
-                    <button class="popup__close" type="button" aria-label="Закрыть"></button>
+                <form class="popup__form popup__form_add">
+                    <button class="popup__close popup__close_card" type="button" aria-label="Закрыть"></button>
                     <h2 class="popup__title">Новое место</h2>
                     <input class="popup__input popup__input_type_title" type="text" name="title" placeholder="Название" required>
                     <input class="popup__input popup__input_type_link" type="text" name="link" placeholder="Ссылка на картинку" required>
-                    <button class="popup__submit" type="submit">Создать</button>
+                    <button class="popup__submit " type="submit">Создать</button>
                 </form>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <div class="popup__content">
               <img class="popup__image" src="#" alt="#">
               <h2 class="popup__description"></h2>
-              <button class="popup__close" type="button" title="Закрыть"></button>
+              <button class="popup__close popup__close_image" type="button" title="Закрыть"></button>
             </div>
           </div>
         <template id="templateCard">
