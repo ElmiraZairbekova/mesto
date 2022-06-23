@@ -6,7 +6,5 @@
 }
 
 .element__image:hover {
-    opacity: .95;
     cursor: pointer;
-    transform: scale(1.01);
 }
