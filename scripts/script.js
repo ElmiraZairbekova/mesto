@@ -29,13 +29,21 @@ const getElementByEvent = evt => evt.currentTarget.closest('.element');
 
 
 
-
 function openPopup(popup) {
     popup.classList.add('popup_active');
+    document.addEventListener ('keydown', closeEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_active');
+  document.removeEventListener ('keydown', closeEsc);
+}
+
+function closeEsc (evt) {
+    if (evt.key === 'Escape') {
+    const popupActive = document.querySelector('.popup_active');
+    closePopup (popupActive);
+  }
 }
 
 function openPopupProfile() {
