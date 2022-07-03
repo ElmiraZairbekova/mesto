@@ -32,17 +32,25 @@ const getElementByEvent = evt => evt.currentTarget.closest('.element');
 function openPopup(popup) {
     popup.classList.add('popup_active');
     document.addEventListener ('keydown', closeEsc);
-}
+    document.addEventListener ('click', handleOverlay);
+  }
 
 function closePopup(popup) {
   popup.classList.remove('popup_active');
   document.removeEventListener ('keydown', closeEsc);
+  document.removeEventListener ('click', handleOverlay);
 }
 
 function closeEsc (evt) {
     if (evt.key === 'Escape') {
     const popupActive = document.querySelector('.popup_active');
     closePopup (popupActive);
+  }
+}
+
+function handleOverlay (evt) {
+  if (evt.target.classList.contains('popup_active')) {
+    closePopup(evt.target);
   }
 }
 
