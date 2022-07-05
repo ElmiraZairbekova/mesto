@@ -27,6 +27,14 @@ const btnCloseImage = document.querySelector('.popup__close_image');
 const cardItemsElement = document.querySelector('.elements');
 const getElementByEvent = evt => evt.currentTarget.closest('.element');
 
+const formElementList = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorTextClass: 'popup__input-error'
+};
 
 
 function openPopup(popup) {
@@ -57,6 +65,7 @@ function handleOverlay (evt) {
 function openPopupProfile() {
   profileNameInput.value = profileName.textContent.trim();
   profileDescriptionInput.value = profileDescription.textContent.trim();
+  activeButtonElement(buttonElement, formElementList);
   openPopup(popupProfile);
 }
 
@@ -126,3 +135,13 @@ btnCloseCard.addEventListener('click', () => closePopup(popupCard));
 btnAddCard.addEventListener('click',() => openPopup(popupCard));
 popupProfile.addEventListener('submit', formSubmitHandler);
 popupCard.addEventListener('submit', addFormCard);
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inputErrorClass: '.popup__input_type_error',
+  errorActiveClass: 'popup__input-error_visible',
+}
+
+enableValidation(config);
