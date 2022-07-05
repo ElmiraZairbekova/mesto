@@ -38,12 +38,10 @@ const formElementList = {
 
 
 function openPopup(popup) {
-    popup.classList.add('popup_active');
-    document.addEventListener ('keydown', closeEsc);
-    document.addEventListener ('click', handleOverlay);
-    profileNameInput.value = profileName.textContent.trim();
-    profileDescriptionInput.value = profileDescription.textContent.trim();
-  }
+  popup.classList.add('popup_active');
+  document.addEventListener ('keydown', closeEsc);
+  document.addEventListener ('click', handleOverlay);
+}
 
 function closePopup(popup) {
   popup.classList.remove('popup_active');
@@ -72,11 +70,11 @@ function openPopupProfile() {
 }
 
 function formSubmitHandler (evt) {
-    evt.preventDefault();
-    profileName.textContent = profileNameInput.value;
-    profileDescription.textContent = profileDescriptionInput.value;
-    profileEditForm.reset();
-    closePopup(popupProfile);
+  evt.preventDefault();
+  profileName.textContent = profileNameInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  profileEditForm.reset();
+  closePopup(popupProfile);
 }
 
 
