@@ -41,6 +41,8 @@ function openPopup(popup) {
     popup.classList.add('popup_active');
     document.addEventListener ('keydown', closeEsc);
     document.addEventListener ('click', handleOverlay);
+    profileNameInput.value = profileName.textContent.trim();
+    profileDescriptionInput.value = profileDescription.textContent.trim();
   }
 
 function closePopup(popup) {
