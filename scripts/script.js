@@ -1,75 +1,86 @@
-const popup = document.querySelector('.popup');
+const popupContainerEdit = document.querySelector(".popup_type_edit"); //по нему ищем детей
+const profileContainer = document.querySelector(".profile__container"); //по нему ищем детей
+const popupProfile = document.querySelector(".popup_type_edit"); //по нему ищем детей
+const popupImage = document.querySelector(".popup_type_view"); //по нему ищем детей
+const popupCard = document.querySelector(".popup_type_add"); //по нему ищем детей
 
-const btnEditProfile = document.querySelector('.profile__edit-button');
-const btnClosePopup = document.querySelector('.popup__close');
-const popupProfile = document.querySelector('.popup_type_edit');
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__description');
-const profileNameInput = document.querySelector('.popup__input_type_name');
-const profileDescriptionInput = document.querySelector('.popup__input_type_description');
-const profileEditForm = document.querySelector('.popup__form_edit');
+const buttonEditProfile = profileContainer.querySelector(
+  ".profile__edit-button"
+);
+const buttonClosePopup = popupContainerEdit.querySelector(".popup__close_edit");
+const profileName = profileContainer.querySelector(".profile__name");
+const profileDescription = profileContainer.querySelector(
+  ".profile__description"
+);
+const profileNameInput = popupContainerEdit.querySelector(
+  ".popup__input_type_name"
+);
+const profileDescriptionInput = popupContainerEdit.querySelector(
+  ".popup__input_type_description"
+);
+const profileEditForm = popupContainerEdit.querySelector(".popup__form_edit");
 
-const popupCard = document.querySelector('.popup_type_add');
-const cardTitleInput = document.querySelector('.popup__input_type_title');
-const cardLinkInput = document.querySelector('.popup__input_type_link');
-const btnCloseCard = document.querySelector('.popup__close_card');
-const cardEditForm = document.querySelector('.popup__form_add');
-const templateCard = document.querySelector('#templateCard').content;
-const btnAddCard = document.querySelector('.profile__add-button');
-const btnDelete = document.querySelector('.element__button-trash');
+const cardTitleInput = popupCard.querySelector(".popup__input_type_title");
+const cardLinkInput = popupCard.querySelector(".popup__input_type_link");
+const buttonCloseCard = popupCard.querySelector(".popup__close_card");
+const cardEditForm = popupCard.querySelector(".popup__form_add");
+const templateElement = document.querySelector("#templateElement").content;
+const buttonAddCard = document.querySelector(".profile__add-button");
+const buttonDelete = document.querySelector(".element__button-trash");
+const buttonDisabled = document.getElementById("button-disabled");
 
-const zoomPopupCardImage = document.querySelector('.popup__image');
-const zoomPopupCardTitle = document.querySelector('.popup__description');
-const popupImage = document.querySelector('.popup_type_view');
-const btnCloseImage = document.querySelector('.popup__close_image');
+const zoomPopupCardImage = popupImage.querySelector(".popup__image");
+const zoomPopupCardTitle = popupImage.querySelector(".popup__description");
+const buttonCloseImage = popupImage.querySelector(".popup__close_image");
 
-
-const cardItemsElement = document.querySelector('.elements');
-const getElementByEvent = evt => evt.currentTarget.closest('.element');
+const cardItemsElement = document.querySelector(".elements");
+const getCardElementByEvent = (evt) => evt.currentTarget.closest(".element");
 
 const formElementList = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorTextClass: 'popup__input-error'
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorTextClass: "popup__input-error",
 };
 
-
 function openPopup(popup) {
-  popup.classList.add('popup_active');
-  document.addEventListener ('keydown', closeEsc);
-  document.addEventListener ('click', handleOverlay);
+  popup.classList.add("popup_active");
+  document.addEventListener("keydown", closeEsc);
 }
 
 function closePopup(popup) {
-  popup.classList.remove('popup_active');
-  document.removeEventListener ('keydown', closeEsc);
-  document.removeEventListener ('click', handleOverlay);
+  popup.classList.remove("popup_active");
+  document.removeEventListener("keydown", closeEsc);
 }
 
-function closeEsc (evt) {
-    if (evt.key === 'Escape') {
-    const popupActive = document.querySelector('.popup_active');
-    closePopup (popupActive);
+function closeEsc(evt) {
+  if (evt.key === "Escape") {
+    const popupActive = document.querySelector(".popup_active");
+    closePopup(popupActive);
   }
 }
 
-function handleOverlay (evt) {
-  if (evt.target.classList.contains('popup_active')) {
-    closePopup(evt.target);
-  }
-}
+const popups = document.querySelectorAll(".popup");
+popups.forEach((popup) => {
+  popup.addEventListener("click", (e) => {
+    if (
+      e.target.classList.contains("popup") ||
+      e.target.classList.contains("popup__close")
+    ) {
+      closePopup(popup);
+    }
+  });
+});
 
 function openPopupProfile() {
   profileNameInput.value = profileName.textContent.trim();
   profileDescriptionInput.value = profileDescription.textContent.trim();
-  activeButtonElement(buttonElement, formElementList);
   openPopup(popupProfile);
 }
 
-function formSubmitHandler (evt) {
+function formSubmitProfile(evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
@@ -77,71 +88,75 @@ function formSubmitHandler (evt) {
   closePopup(popupProfile);
 }
 
-
-function addFormCard (evt) {
+function handleAddFormCard(evt) {
   evt.preventDefault();
-  const card = { 
-    name: cardTitleInput.value, 
-    link: cardLinkInput.value 
-  }; 
-  addElement(card);
-  cardEditForm.reset();
-  closePopup(popupCard);
-};
-
-function likeButton(evt) {
-  evt.target.classList.toggle('element__button-like_active');
+  const card = {
+    name: cardTitleInput.value,
+    link: cardLinkInput.value,
   };
+  addElement(card);
+  closePopup(popupCard);
+  cardEditForm.reset();
+  buttonDisabled.setAttribute("disabled", true);
+}
 
+function handleLikeClick(evt) {
+  evt.target.classList.toggle("element__button-like_active");
+}
 
-  
-function createCard ({name, link}) {
-  const cardElement = templateCard.querySelector('.element').cloneNode(true);
-  const cardImage = cardElement.querySelector('.element__image');
-  cardImage.addEventListener('click', evt => {openPopupImage(evt)});
+function createCard({ name, link, alt }) {
+  const cardElement = templateElement.querySelector(".element").cloneNode(true);
+  const cardImage = cardElement.querySelector(".element__image");
+  cardImage.addEventListener("click", (evt) => {
+    openPopupImage(evt);
+  });
 
   cardImage.src = link;
-  cardElement.querySelector('.element__title').textContent = name;
+  cardImage.alt = alt;
+  cardElement.querySelector(".element__title").textContent = name;
 
-  cardElement.querySelector('.element__button-like').addEventListener('click', likeButton);
+  cardElement
+    .querySelector(".element__button-like")
+    .addEventListener("click", handleLikeClick);
 
-  cardElement.querySelector('.element__button-trash').addEventListener('click', evt => {
-    cardElement.remove();
-  });
-    return cardElement;
+  cardElement
+    .querySelector(".element__button-trash")
+    .addEventListener("click", (evt) => {
+      cardElement.remove(evt);
+    });
+  return cardElement;
 }
 
 function addElement(cardElement) {
-const elementCard = createCard(cardElement);
-cardItemsElement.prepend(elementCard);
-};
+  const elementCard = createCard(cardElement);
+  cardItemsElement.prepend(elementCard);
+}
 
 initialCards.forEach(addElement);
 
-
-
-
-function openPopupImage(evt){
-const element = getElementByEvent(evt);
-zoomPopupCardImage.src = element.querySelector('.element__image').src;
-zoomPopupCardTitle.textContent = element.querySelector('.element__title').textContent;
-openPopup(popupImage);
+function openPopupImage(evt) {
+  const imageElement = getCardElementByEvent(evt);
+  zoomPopupCardImage.src = imageElement.querySelector(".element__image").src;
+  zoomPopupCardTitle.textContent =
+    imageElement.querySelector(".element__title").textContent;
+  zoomPopupCardImage.alt = imageElement.querySelector(".element__image").alt;
+  openPopup(popupImage);
 }
 
-btnEditProfile.addEventListener('click',() => openPopup(popupProfile));
-btnClosePopup.addEventListener('click', () => closePopup(popupProfile));
-btnCloseImage.addEventListener('click', () => closePopup(popupImage));
-btnCloseCard.addEventListener('click', () => closePopup(popupCard));
-btnAddCard.addEventListener('click',() => openPopup(popupCard));
-popupProfile.addEventListener('submit', formSubmitHandler);
-popupCard.addEventListener('submit', addFormCard);
+buttonEditProfile.addEventListener("click", openPopupProfile);
+buttonClosePopup.addEventListener("click", () => closePopup(popupProfile));
+buttonCloseImage.addEventListener("click", () => closePopup(popupImage));
+buttonCloseCard.addEventListener("click", () => closePopup(popupCard));
+buttonAddCard.addEventListener("click", () => openPopup(popupCard));
+popupProfile.addEventListener("submit", formSubmitProfile);
+popupCard.addEventListener("submit", handleAddFormCard);
 
 const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inputErrorClass: '.popup__input_type_error',
-  errorActiveClass: 'popup__input-error_visible',
-}
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inputErrorClass: "popup__input_type_error",
+  errorActiveClass: "popup__input-error_visible",
+};
 
 enableValidation(config);

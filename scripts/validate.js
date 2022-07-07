@@ -46,7 +46,7 @@ const setEventListeners = (formElement) => {
             toggleButtonState(buttonElement, inputList);
         });
     })
-    toggleButtonState(buttonElement, inputList);
+    // toggleButtonState(buttonElement, inputList);
 };
 
 const enableValidation = (config) => {
