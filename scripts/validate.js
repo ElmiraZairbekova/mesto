@@ -24,11 +24,17 @@ const hasInvalidInput = (inputList) => {
     return inputList.some(inputElement => !inputElement.validity.valid)
 }
 
+const setDisabledButton = (buttonElement) => {
+    buttonElement.setAttribute("disabled", true);}
+
+const setEnabledButton = (buttonElement) => {
+    buttonElement.removeAttribute("disabled", true);}
+
 const toggleButtonState = (buttonElement, inputList) => {
     if (hasInvalidInput(inputList)){
-        buttonElement.disabled = true;
+        setDisabledButton(buttonElement);
     } else {
-        buttonElement.disabled = false;
+        setEnabledButton(buttonElement);
     }
 }
 

@@ -97,7 +97,7 @@ function handleAddFormCard(evt) {
   addElement(card);
   closePopup(popupCard);
   cardEditForm.reset();
-  buttonDisabled.setAttribute("disabled", true);
+  setDisabledButton(buttonDisabled);
 }
 
 function handleLikeClick(evt) {
