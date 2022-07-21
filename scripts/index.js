@@ -1,7 +1,10 @@
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+
 const popupContainerEdit = document.querySelector(".popup_type_edit"); //по нему ищем детей
 const profileContainer = document.querySelector(".profile__container"); //по нему ищем детей
 const popupProfile = document.querySelector(".popup_type_edit"); //по нему ищем детей
-const popupImage = document.querySelector(".popup_type_view"); //по нему ищем детей
+export const popupImage = document.querySelector(".popup_type_view"); //по нему ищем детей
 const popupCard = document.querySelector(".popup_type_add"); //по нему ищем детей
 
 const buttonEditProfile = profileContainer.querySelector(
@@ -24,17 +27,41 @@ const cardTitleInput = popupCard.querySelector(".popup__input_type_title");
 const cardLinkInput = popupCard.querySelector(".popup__input_type_link");
 const buttonCloseCard = popupCard.querySelector(".popup__close_card");
 const cardEditForm = popupCard.querySelector(".popup__form_add");
-const templateElement = document.querySelector("#templateElement").content;
 const buttonAddCard = document.querySelector(".profile__add-button");
-const buttonDelete = document.querySelector(".element__button-trash");
 const buttonDisabled = document.getElementById("button-disabled");
 
-const zoomPopupCardImage = popupImage.querySelector(".popup__image");
-const zoomPopupCardTitle = popupImage.querySelector(".popup__description");
+export const zoomPopupCardImage = popupImage.querySelector(".popup__image");
+export const zoomPopupCardTitle = popupImage.querySelector(".popup__description");
 const buttonCloseImage = popupImage.querySelector(".popup__close_image");
 
 const cardItemsElement = document.querySelector(".elements");
-const getCardElementByEvent = (evt) => evt.currentTarget.closest(".element");
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+]; 
 
 const formElementList = {
   formSelector: ".popup__form",
@@ -45,7 +72,7 @@ const formElementList = {
   errorTextClass: "popup__input-error",
 };
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_active");
   document.addEventListener("keydown", closeEsc);
 }
@@ -88,6 +115,10 @@ function formSubmitProfile(evt) {
   closePopup(popupProfile);
 }
 
+function setDisabledButton (submitButton) {
+submitButton.setAttribute("disabled", true);
+}
+
 function handleAddFormCard(evt) {
   evt.preventDefault();
   const card = {
@@ -100,48 +131,13 @@ function handleAddFormCard(evt) {
   setDisabledButton(buttonDisabled);
 }
 
-function handleLikeClick(evt) {
-  evt.target.classList.toggle("element__button-like_active");
-}
-
-function createCard({ name, link, alt }) {
-  const cardElement = templateElement.querySelector(".element").cloneNode(true);
-  const cardImage = cardElement.querySelector(".element__image");
-  cardImage.addEventListener("click", (evt) => {
-    openPopupImage(evt);
-  });
-
-  cardImage.src = link;
-  cardImage.alt = alt;
-  cardElement.querySelector(".element__title").textContent = name;
-
-  cardElement
-    .querySelector(".element__button-like")
-    .addEventListener("click", handleLikeClick);
-
-  cardElement
-    .querySelector(".element__button-trash")
-    .addEventListener("click", (evt) => {
-      cardElement.remove(evt);
-    });
-  return cardElement;
-}
 
 function addElement(cardElement) {
-  const elementCard = createCard(cardElement);
+  const elementCard = generateCard(cardElement);
   cardItemsElement.prepend(elementCard);
 }
 
 initialCards.forEach(addElement);
-
-function openPopupImage(evt) {
-  const imageElement = getCardElementByEvent(evt);
-  zoomPopupCardImage.src = imageElement.querySelector(".element__image").src;
-  zoomPopupCardTitle.textContent =
-    imageElement.querySelector(".element__title").textContent;
-  zoomPopupCardImage.alt = imageElement.querySelector(".element__image").alt;
-  openPopup(popupImage);
-}
 
 buttonEditProfile.addEventListener("click", openPopupProfile);
 buttonClosePopup.addEventListener("click", () => closePopup(popupProfile));
@@ -152,11 +148,21 @@ popupProfile.addEventListener("submit", formSubmitProfile);
 popupCard.addEventListener("submit", handleAddFormCard);
 
 const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit",
-  inputErrorClass: "popup__input_type_error",
-  errorActiveClass: "popup__input-error_visible",
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inputErrorClass: 'popup__input_type_error',
+  errorActiveClass: 'popup__input-error_visible'
 };
 
-enableValidation(config);
+const profileEditValidator = new FormValidator(config, profileEditForm);
+profileEditValidator.enableValidation();
+
+const formAddValidator = new FormValidator(config, popupCard);
+formAddValidator.enableValidation();
+
+function generateCard (cardElement) {
+  const card = new Card(cardElement, '#templateElement');
+  return card.createNewCard(); //ok
+};
+
