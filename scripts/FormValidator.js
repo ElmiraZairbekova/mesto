@@ -50,13 +50,11 @@ export default class FormValidator {
     });
   }
 
-
   setDisabledButton () {
     this._buttonElement.setAttribute("disabled", true);}
     
   setEnabledButton () {
     this._buttonElement.removeAttribute("disabled", true);}
-
 
   toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {

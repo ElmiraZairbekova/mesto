@@ -36,33 +36,6 @@ const buttonCloseImage = popupImage.querySelector(".popup__close_image");
 
 const cardItemsElement = document.querySelector(".elements");
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
 const formElementList = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -107,12 +80,13 @@ function openPopupProfile() {
   openPopup(popupProfile);
 }
 
-function formSubmitProfile(evt) {
+function submitFormProfile(evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   profileEditForm.reset();
   closePopup(popupProfile);
+  setDisabledButton (submitButton)
 }
 
 function setDisabledButton (submitButton) {
@@ -144,7 +118,7 @@ buttonClosePopup.addEventListener("click", () => closePopup(popupProfile));
 buttonCloseImage.addEventListener("click", () => closePopup(popupImage));
 buttonCloseCard.addEventListener("click", () => closePopup(popupCard));
 buttonAddCard.addEventListener("click", () => openPopup(popupCard));
-popupProfile.addEventListener("submit", formSubmitProfile);
+popupProfile.addEventListener("submit", submitFormProfile);
 popupCard.addEventListener("submit", handleAddFormCard);
 
 const config = {
@@ -165,4 +139,3 @@ function generateCard (cardElement) {
   const card = new Card(cardElement, '#templateElement');
   return card.createNewCard(); //ok
 };
-
