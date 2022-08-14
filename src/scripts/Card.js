@@ -1,17 +1,17 @@
-import {openPopup, popupImage, zoomPopupCardImage, zoomPopupCardTitle} from './index.js';
+// import {openPopup, popupImage, zoomPopupCardImage, zoomPopupCardTitle} from './index.js';
 export default class Card {
-    constructor(card, cardSelector) {
+    constructor(cardData, cardSelector, handleCardClick) {
     this._cardSelector = cardSelector;
-    this._name = card.name;
-    this._link = card.link;
+    this._name = cardData.name;
+    this._link = cardData.link;
     this._isLiked = false;
-
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
     const cardElement = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
     return cardElement;
-  }
+      }
 
 
   createNewCard() {
@@ -24,14 +24,14 @@ export default class Card {
     this._titleElement.textContent = this._name;
     this._setEventListeners();
     return this._element;
-  }
+ }
 
   _setEventListeners() {
     this._likeButton = this._element.querySelector('.element__button-like');
     this._deleteButton = this._element.querySelector('.element__button-trash');
 
     this._imgElement.addEventListener('click', () => {
-      this._openPopupImage(this._cardImageLink, this._cardTitle);
+      this._handleCardClick(this._link, this._name); 
     });
 
     this._likeButton.addEventListener('click', () => {
@@ -42,14 +42,6 @@ export default class Card {
       this._deleteCard();
     });
   }
-
-  _openPopupImage() {
-    
-    zoomPopupCardImage.src = this._link;
-    zoomPopupCardTitle.alt = this._name;
-    zoomPopupCardTitle.textContent = this._name;
-    openPopup(popupImage);
-  };
 
   _likeCard() {
     this._likeButton.classList.toggle('element__button-like_active');
