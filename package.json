@@ -1,7 +1,7 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "Яндекс практикум. \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[П\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C Проект Место",
+  "description": "Яндекс Практикум. Учебный проект Mesto",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/ElmiraZairbekova/mesto.git"
   },
-  "author": "Zirbekova Elmira",
+  "author": "Zairbekova Elmira",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ElmiraZairbekova/mesto/issues"
