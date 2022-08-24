@@ -1,24 +1,31 @@
 export default class UserInfo {
-    constructor( profileNameSelector, profileAboutSelector) {
-      this._profileNameElement = document.querySelector(profileNameSelector);
-      this._profileDescriptionElement = document.querySelector(profileAboutSelector);
+      constructor({ profileNameSelector, profileAboutSelector, profileAvatarSelector }) {
+        this._profileName = document.querySelector(profileNameSelector);
+        this._profileDescription = document.querySelector(profileAboutSelector);
+        this._profileAvatar = document.querySelector(profileAvatarSelector);
+      }
+    
+      getUserInfo() {
+        return {
+          userName: this._profileName.textContent,
+          userDescription: this._profileDescription.textContent
+        }
+      }
+    
+      setUserInfo({ userName, userDescription }) {
+        this._profileName.textContent = userName;
+        this._profileDescription.textContent = userDescription;
+      }
+    
+      setUserAvatar({ userAvatarLink }) {
+        this._profileAvatar.src = userAvatarLink;
+      }
+    
+      saveUserId(userId) {
+        this._userId = userId;
+      }
+    
+      getUserId() {
+        return this._userId;
+      }
     }
-
-    // берем данные профиля в popup
-    getUserInfo() {    
-      this._userInfo = {
-        name: this._profileNameElement.textContent,
-        description: this._profileDescriptionElement.textContent
-        
-    };
-    console.log(this._userInfo.description)
-        return this._userInfo;}
-
- //  заполненные поля в popup вставляем в профиль
-    setUserInfo(userInfo) {
-      this._profileNameElement.textContent = userInfo.name;
-      this._profileDescriptionElement.textContent = userInfo.description;
-      
-      console.log(userInfo.description)
-    };
-}

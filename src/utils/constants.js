@@ -1,28 +1,21 @@
-export const buttonEditProfile = document.querySelector(
-  ".profile__edit-button"
-);
-export const buttonClosePopup = document.querySelector(".popup__close_edit");
+export const buttonEditProfile = document.querySelector(".profile__edit-button");
 
 export const profileNameSelector = '.profile__name';
 export const profileAboutSelector = '.profile__description';
 
-export const profileNameInput = document.querySelector(
-  ".popup__input_type_name"
-);
-export const profileDescriptionInput = document.querySelector(
-  ".popup__input_type_description"
-);
-export const popupProfileSelector = document.querySelector(".popup__form_edit");
 
-export const cardTitleInput = document.querySelector(".popup__input_type_title");
-export const cardLinkInput = document.querySelector(".popup__input_type_link");
-export const buttonCloseCard = document.querySelector(".popup__close_card");
-export const cardEditForm = document.querySelector(".popup__form_add");
+export const popupProfileSelector = ".popup_type_edit";
+
 export const buttonAddCard = document.querySelector(".profile__add-button");
-export const buttonDisabled = document.getElementById("button-disabled");
+export const popupNewPlaceSelector = ".popup_type_add";
+export const popupViewerSelector = '.popup_type_view';
+export const cardsContainerSelector = ".elements";
 
-export const cardItemsElement = document.querySelector(".elements");
-
+export const buttonEditAvatar = document.querySelector('.profile__avatar-edit');
+export const profileAvatarSelector ='.profile__avatar';
+export const popupUpdateAvatarSelector ='.popup_type_avatar';
+export const cardSelector = '#templateElement';
+export const popupConfirmSelector = '.popup_form_confirm';
 
 export const config = {
   formSelector: '.popup__form',
@@ -32,33 +25,30 @@ export const config = {
   errorActiveClass: 'popup__input-error_visible'
 };
 
-export const formValidation = {};
 
-
-export const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ]; 
-
+// export const initialCards = [
+//     {
+//       name: 'Архыз',
+//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+//     },
+//     {
+//       name: 'Челябинская область',
+//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+//     },
+//     {
+//       name: 'Иваново',
+//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+//     },
+//     {
+//       name: 'Камчатка',
+//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+//     },
+//     {
+//       name: 'Холмогорский район',
+//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+//     },
+//     {
+//       name: 'Байкал',
+//       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+//     }
+//   ]; 
