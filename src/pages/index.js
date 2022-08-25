@@ -1,4 +1,4 @@
-import './index.css';
+// import './index.css';
 import {
   config,
   buttonEditAvatar,
@@ -39,7 +39,6 @@ const userProfile = new UserInfo({ profileNameSelector, profileAboutSelector, pr
 api.getPageNeedData().then((responses) => {
   const [cardData, userData] = responses;
   userProfile.setUserInfo({ userName: userData.name, userDescription: userData.about });
-  console.log ({userName: userData.name, userDescription: userData.about})
   userProfile.setUserAvatar({ userAvatarLink: userData.avatar });
   userProfile.saveUserId(userData._id);
   cards.renderItems(cardData);
@@ -79,7 +78,6 @@ const popupProfile = new PopupWithForm(popupProfileSelector, (evt) => {
   const formValues = popupProfile.getFormValues();
   api.updateUserInfo({ name: formValues.name, about: formValues.description }).then((data) => {
     userProfile.setUserInfo({ userName: data.name, userDescription: data.about });
-    console.log ({ userName: data.name, userDescription: data.about })
     popupProfile.close();
   }).catch((err) => {
     console.error(err);
@@ -147,13 +145,12 @@ function createNewCard(item, cardSelector) {
         });
       }
     },
-    handleRemoveButtonClick: (evt) => {
-      const cardElement = evt.target.closest('.element');
+    handleRemoveButtonClick: () => {
       const cardId = card.getCardId();
       popupConfirm.changeHandlerSubmitForm((evt) => {
         evt.preventDefault();
         api.removeCard(cardId).then(() => {
-          cardElement.remove();
+          card.removeCard();
           popupConfirm.close();
         }).catch((err) => {
           console.error(err);
